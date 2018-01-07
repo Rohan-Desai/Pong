@@ -10,10 +10,10 @@ import javax.swing.JPanel;
 public class Paddles extends JPanel {
 	int PYCord1 = 150;
 	int PYCord2 = 150;
-	int BXCord1 = 100;
-	int BYCord1 = 300;
-	int MoveX = 5;
-	int MoveY = 5;
+	int BXCord = 100;
+	int BYCord = 300;
+	int MoveX = 1;
+	int MoveY = 1;
 
 	public Paddles() {
 		super();
@@ -55,43 +55,44 @@ public class Paddles extends JPanel {
 
 		task = new TimerTask() {
 			public void run() {
-				BXCord1 = BXCord1 + MoveX;
-				BYCord1 = BYCord1 + MoveY;
-				if (BXCord1 < 0) {
+				BXCord = BXCord + MoveX;
+				BYCord = BYCord + MoveY;
+				if (BXCord < 0) {
 					MoveX = 0;
 					MoveY = 0;
-					repaint();
+
 				}
-				if (BXCord1 > 360) {
+				if (BXCord > 360) {
 					MoveX = 0;
 					MoveY = 0;
-					repaint();
+
 				}
-				if (BYCord1 < 0) {
-					MoveY = 5;
-					repaint();
+				if (BYCord < 0) {
+					MoveY = 1;
+
 				}
-				if (BYCord1 > 370) {
-					MoveY = -5;
-					repaint();
+				if (BYCord > 370) {
+					MoveY = -1;
+
 				}
 				for (int i = 0; i < 76; i++) {
-					if (BYCord1 == PYCord1 + i && BXCord1 == 350) {
-						MoveY = -5;
-						MoveX = 5;
-						repaint();
+					if (BYCord == PYCord1 + i && BXCord == 350) {
+						MoveY = 1;
+						MoveX = -1;
+
 					}
-					if (BYCord1 == PYCord2 + i && BXCord1 == 20) {
-						MoveY = 5;
-						MoveX = -5;
-						repaint();
+					if (BYCord == PYCord2 + i && BXCord == 20) {
+						MoveY = -1;
+						MoveX = 1;
+
 					}
 				}
+				repaint();
 			}
 
 		};
 
-		timer.scheduleAtFixedRate(task, 0, 100);
+		timer.scheduleAtFixedRate(task, 0, 50);
 
 	}
 
@@ -101,7 +102,7 @@ public class Paddles extends JPanel {
 		g.setColor(Color.WHITE);
 		g.fillRect(20, PYCord2, 10, 75);
 		g.fillRect(350, PYCord1, 10, 75);
-		g.fillOval(BXCord1, BYCord1, 10, 10);
+		g.fillOval(BXCord, BYCord, 10, 10);
 	}
 
 	public void draw() {
